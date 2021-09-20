@@ -6,15 +6,17 @@ services:
     restart: always
     volumes:
       - db_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: postgres
-      POSTGRES_DB: root_db
+      - ../source-data:/source-data
+      - ../database-setup/sourcedb.sql:/docker-entrypoint-initdb.d/sourcedb.sql
+    ports:
+      - "5433:5432"
+    env_file: .env
     healthcheck:
       test: pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"
       interval: 10s
       timeout: 2s
       retries: 10
+
   nocodb:
     depends_on:
       root_db:
@@ -26,7 +28,8 @@ services:
       - "8082:8082"
       - "8083:8083"
     restart: always
-    environment:
-      NC_DB: "pg://root_db:5432?u=postgres&p=password&d=root_db"
+    env_file: .env
+    #environment:
+      #NC_DB: "pg://root_db:5432?u=postgres&p=password&d=root_db"
 volumes:
   db_data: {}
