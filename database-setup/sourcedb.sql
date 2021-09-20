@@ -43,7 +43,7 @@ CREATE TABLE ecommerce.geolocation (
     geolocation_city TEXT,
     geolocation_state CHAR(2)
 );
-CREATE TABLE order_items (
+CREATE TABLE ecommerce.order_items (
   order_id TEXT,
   order_item_id INT,
   product_id TEXT,
@@ -52,14 +52,14 @@ CREATE TABLE order_items (
   price NUMERIC,
   freight_value NUMERIC
 );
-CREATE TABLE order_payments (
+CREATE TABLE ecommerce.order_payments (
   order_id TEXT,
   payment_sequential INT,
   payment_type TEXT,
   payment_installments INT,
   payment_value NUMERIC
 );
-CREATE TABLE products (
+CREATE TABLE ecommerce.products (
   product_id TEXT,
   product_category_name TEXT,
   product_name_length INT,
@@ -70,13 +70,13 @@ CREATE TABLE products (
   product_height_cm INT,
   product_width_cm INT
 );
-CREATE TABLE sellers (
+CREATE TABLE ecommerce.sellers (
   seller_id TEXT,
   seller_zip_code_prefix CHAR(5),
   seller_city TEXT,
   seller_state CHAR(2)
 );
-CREATE TABLE product_category_name_translation (
+CREATE TABLE ecommerce.product_category_name_translation (
   product_category_name TEXT,
   product_category_name_english TEXT
 );
@@ -99,12 +99,12 @@ FROM
 COPY ecommerce.order_payments
 FROM
   '/source-data/olist_order_payments_dataset.csv' CSV DELIMITER ',' HEADER;
-COPY products
+COPY ecommerce.products
 FROM
   '/source-data/olist_products_dataset.csv' CSV DELIMITER ',' HEADER;
-COPY sellers
+COPY ecommerce.sellers
 FROM
   '/source-data/olist_sellers_dataset.csv' CSV DELIMITER ',' HEADER;
-COPY product_category_name_translation
+COPY ecommerce.product_category_name_translation
 FROM
   '/source-data/product_category_name_translation.csv' CSV DELIMITER ',' HEADER;
