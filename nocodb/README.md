@@ -35,7 +35,7 @@ such an event occurs, a notification can be sent to one of the applications (e.g
 
 **Access Control:** CRUD operations are available at column-level and row-level granularity:
 
-![RBAC for CRUD operations](assets/images/rbac_for_crud.png "RBAC for CRUD operations")
+![RBAC for CRUD operations](../assets/images/rbac_for_crud.png "RBAC for CRUD operations")
 
 Currently, there are 5 system-defined roles, but customized roles will be available in the future.
 
