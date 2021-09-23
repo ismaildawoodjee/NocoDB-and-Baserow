@@ -6,3 +6,6 @@ temp
 *.csv
 *.xlsx
 *.parquet
+
+!new_flights.csv
+!old_flights.csv

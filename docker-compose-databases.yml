@@ -1,0 +1,58 @@
+version: '3'
+services:
+  postgres-sourcedb2:
+    image: postgres:latest
+    container_name: sourcedb2
+    environment:
+      POSTGRES_USER: sourcedb2
+      POSTGRES_PASSWORD: sourcedb2
+      POSTGRES_DB: sourcedb2
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - "5440:5432"
+    volumes:
+      - ./database-setup/sourcedb.sql:/docker-entrypoint-initdb.d/sourcedb.sql
+      - ./source-data:/source-data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "sourcedb2"]
+      interval: 5s
+      retries: 5
+    restart: always
+
+  postgres-sourcedb1:
+    image: postgres:latest
+    container_name: sourcedb1
+    environment:
+      POSTGRES_USER: sourcedb1
+      POSTGRES_PASSWORD: sourcedb1
+      POSTGRES_DB: sourcedb1
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - "5441:5432"
+    volumes:
+      - ./database-setup/sourcedb.sql:/docker-entrypoint-initdb.d/sourcedb.sql
+      - ./source-data:/source-data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "sourcedb1"]
+      interval: 5s
+      retries: 5
+    restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@admin.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    # volumes:
+    #    - pgadmin:/var/lib/pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    restart: unless-stopped
