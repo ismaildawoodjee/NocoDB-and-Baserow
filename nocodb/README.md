@@ -4,15 +4,15 @@ Start setup:
 
     docker-compose up -d
 
-Connect to database from NocoDB web UI using:
+Connect to database from NocoDB web UI using credentials in .env:
 
     Host Address: root_db
     Port Number: 5432
-    Username: postgres
-    Password: password
-    Database: root_db
+    Username: nocodb1
+    Password: nocodb1
+    Database: nocodb
 
-For external applications, use `localhost:5433` instead.
+For external applications, use `localhost:5433` (or `host-ip-address:port`, e.g. `192.168.1.2:5433` ) instead.
 
 If trying to load data by executing SQL statements, the `NC_DB` variable does not provide
 enough permissions for the user, and will result in a `Parser.parseErrorMessage`.
