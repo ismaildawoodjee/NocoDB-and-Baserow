@@ -27,7 +27,7 @@ linked video.
 [feature request](https://github.com/nocodb/nocodb/issues/179) is in one of their
 [roadmaps](https://github.com/nocodb/nocodb/projects/1#card-67764613) for the future.
 
-**Audit:** User operations and changes are recorded in the `Audit` tab. Logging?
+**Audit:** User operations and changes are recorded in the `Audit` tab. Changes to database tables are also recorded there (click `Reload` to update).
 
 **Triggers/Alerts:** Triggers can be set up using [webhooks](https://docs.nocodb.com/developer-resources/webhooks)
 in the `Automations` tab when viewing a table. `INSERT`, `UPDATE`, and `DELETE` triggers are supported and when
